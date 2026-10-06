@@ -5,7 +5,7 @@ client = OpenAI(
     api_key = "ollama"
 )
 
-prompt = str(input("Hello!"))
+prompt = str(input("Enter your prompt: "))
 
 stream = client.chat.completions.create(
     model="qwen3:14b",
@@ -15,6 +15,6 @@ stream = client.chat.completions.create(
 
 for chunk in stream:
     if chunk.choices[0].delta.content:
-        print(chunk.choises[0].delta.content, end="", flush=True)
+        print(chunk.choices[0].delta.content, end="", flush=True)
 
 print()

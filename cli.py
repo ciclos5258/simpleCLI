@@ -1,4 +1,4 @@
-from openai import openAI
+from openai import OpenAI
 
 client = OpenAI(
     base_url = "http://100.72.34.69:11434/v1",

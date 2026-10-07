@@ -1,20 +1,27 @@
-from openai import OpenAI
+from qwen_agent.agents import Assistant
+from qwen_agent.utils.output_beautify import typewriter
 
-client = OpenAI(
-    base_url = "http://100.72.34.69:11434/v1",
-    api_key = "ollama"
-)
+llm_cfg = {
+    'model': "qwen3:14b",
+    'model_server': 'http://100.72.34.69:11434/v1',
+    'api_key': 'ollama',
+    'generate_cfg': {
+        'fncall_prompt_type': 'nous',
+    },
+}
 
-prompt = str(input("Enter your prompt: "))
+bot = Assistant(llm_cfg=llm_cfg)
 
-stream = client.chat.completions.create(
-    model="qwen3:14b",
-    messages=[{"role": "user", "content": prompt},],
-    stream=True,
-)
+prompt = str(input("Please enter your prompt: "))
 
-for chunk in stream:
-    if chunk.choices[0].delta.content:
-        print(chunk.choices[0].delta.content, end="", flush=True)
+messages = [{'role': 'user', 'content': prompt}]
 
-print()
+print("Агент думает и действует:\n" + "-"*30)
+
+response_plain_text = ""
+
+for response in bot.run(messages=messages):
+    response_plain_text = typewriter(response, response_plain_text)
+
+print("\n" + "-"*30)
+print("Готово! Полный цикл завершен.")

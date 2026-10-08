@@ -10,18 +10,36 @@ llm_cfg = {
     },
 }
 
-bot = Assistant(llm_cfg=llm_cfg)
+messsages = []
+bot = Assistant(llm=llm_cfg)
 
-prompt = str(input("Please enter your prompt: "))
 
-messages = [{'role': 'user', 'content': prompt}]
+while True:
+    prompt = str(input("Please enter your prompt: "))
 
-print("Агент думает и действует:\n" + "-"*30)
+    if prompt.lower().strip() in ["exit", "quit"]:
+        print("Workflow terminated by user. Exiting...")
+        break
 
-response_plain_text = ""
+    if not prompt:
+        continue
 
-for response in bot.run(messages=messages):
-    response_plain_text = typewriter(response, response_plain_text)
+    print("Агент думает и действует:\n" + "-"*30)
+
+    messages.append({'role': 'user', 'content': prompt})
+    response_plain_text = ""
+    last_response = []
+
+    for response in bot.run(messages=messages):
+        response_plain_text = typewriter(response, response_plain_text)
+        last_response = response
+
+
+    if last_response:
+        messages.extend(last_response)
+        
+
+    print("\n" + "-"*30)
 
 print("\n" + "-"*30)
 print("Готово! Полный цикл завершен.")

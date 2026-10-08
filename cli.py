@@ -1,5 +1,5 @@
 from qwen_agent.agents import Assistant
-from qwen_agent.utils.output_beautify import typewriter
+from qwen_agent.utils.output_beautify import typewriter_print as typewriter
 
 llm_cfg = {
     'model': "qwen3:14b",
@@ -10,7 +10,7 @@ llm_cfg = {
     },
 }
 
-messsages = []
+messages = []
 bot = Assistant(llm=llm_cfg)
 
 

@@ -4,8 +4,6 @@ from qwen_agent.tools.base import BaseTool, register_tool
 
 from db import DB_PATH
 
-print(DB_PATH)
-
 @register_tool('memory_save')  # имя, под которым инструмент увидит модель
 class MemorySave(BaseTool):
     # description — это по сути промпт: по нему модель решает, когда вызывать

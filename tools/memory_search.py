@@ -1,7 +1,8 @@
 import sqlite3
 
-
 from qwen_agent.tools.base import BaseTool, register_tool
+
+from db import DB_PATH
 
 @register_tool('memory_search')
 class MemorySearch(BaseTool):

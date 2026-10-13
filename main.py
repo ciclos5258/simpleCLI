@@ -42,7 +42,7 @@ def main():
     bot = Assistant(
         llm=llm_cfg,
         system_message=SYSTEM_MESSAGE,
-        function_list=['memory_save', 'memory_search'],
+                function_list=['memory_save', 'memory_search', 'web_search'],
     )
     messages = []
 

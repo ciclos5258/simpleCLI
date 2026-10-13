@@ -7,8 +7,8 @@ from datetime import date
 from dotenv import load_dotenv
 load_dotenv()
 
-@register_tool('web_search')
-class WebSearch(BaseTool):
+@register_tool('my_web_search')
+class MyWebSearch(BaseTool):
     current_date = str(date.today())
     description = (
         'Делает запрос в интернет и возвращает результаты поиска.'

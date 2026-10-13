@@ -1,16 +1,29 @@
+import os
+
 import tools  # noqa: F401  (нужен ради регистрации инструментов)
 from db import init_db
 from qwen_agent.agents import Assistant
 from qwen_agent.utils.output_beautify import typewriter_print as typewriter
+import dotenv
+dotenv.load_dotenv()
 
 EXIT_WORDS = {'exit', 'quit'}
 
+llm_cfg = {
+    'model': 'nvidia/nemotron-3-ultra-550b-a55b:free',
+    'model_server': 'https://openrouter.ai/api/v1',
+    'api_key': os.getenv('OPENROUTER_API_KEY'),
+    'generate_cfg': {'fncall_prompt_type': 'nous'},
+}
+
+"""
 llm_cfg = {
     'model': 'qwen3:14b',
     'model_server': 'http://100.72.34.69:11434/v1',
     'api_key': 'ollama',
     'generate_cfg': {'fncall_prompt_type': 'nous'},
 }
+"""
 
 SYSTEM_MESSAGE = """Ты помощник с долговременной памятью. Отвечай по-русски.
 - Если пользователь рассказывает о себе что-то важное, вызови memory_save.
@@ -42,7 +55,7 @@ def main():
     bot = Assistant(
         llm=llm_cfg,
         system_message=SYSTEM_MESSAGE,
-                function_list=['memory_save', 'memory_search', 'web_search'],
+                function_list=['memory_save', 'memory_search', 'my_web_search'],
     )
     messages = []
 

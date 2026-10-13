@@ -35,4 +35,3 @@ class MemorySearch(BaseTool):
         if not found:
             return 'В памяти ничего не найдено.'
         return '\n'.join(f'- {t}' for t in found)
- 

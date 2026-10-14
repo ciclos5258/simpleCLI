@@ -23,9 +23,7 @@ class MemorySearch(BaseTool):
  
         with sqlite3.connect(DB_PATH) as conn:
             rows = conn.execute('SELECT text FROM memories').fetchall()
- 
-        # Фильтруем в Python, а не через SQL LIKE: LIKE в SQLite не учитывает
-        # регистр только для латиницы, а для кириллицы «Брно» != «брно».
+            
         words = query.split()
         found = [
             text for (text,) in rows

@@ -9,6 +9,8 @@ dotenv.load_dotenv()
 
 EXIT_WORDS = {'exit', 'quit'}
 
+# google/gemma-4-31b-it:free
+# cohere/north-mini-code:free
 llm_cfg = {
     'model': 'nvidia/nemotron-3-ultra-550b-a55b:free',
     'model_server': 'https://openrouter.ai/api/v1',
@@ -25,9 +27,10 @@ llm_cfg = {
 }
 """
 
-SYSTEM_MESSAGE = """Ты помощник с долговременной памятью. Отвечай по-русски.
+SYSTEM_MESSAGE = """Ты помощник Pyro версии 3.0. Отвечай по-русски.
 - Если пользователь рассказывает о себе что-то важное, вызови memory_save.
 - Если вопрос касается пользователя или прошлого, сначала вызови memory_search.
+- Если нужно что-то найти в интернете, вызови my_web_search.
 - Сохраняй по одному факту за вызов."""
 
 
@@ -61,7 +64,7 @@ def main():
 
     while True:  # внешний цикл: диалог с человеком
         try:
-            prompt = input('You> ').strip()
+            prompt = input('You: ').strip()
         except (EOFError, KeyboardInterrupt):  # Ctrl+D / Ctrl+C
             print()
             break

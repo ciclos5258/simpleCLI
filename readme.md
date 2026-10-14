@@ -16,4 +16,5 @@ python main.py # запуск ИЗ КОРНЯ, иначе - ломается п�
 - [ ] `memory_update` / `memory_delete`
 - [x] Веб поиск
 - [ ] Доступ к изолированной Bash
-- [ ] Agentic loop
+- [x] Agentic loop
+- [ ] Разобраться с интерфейсом
